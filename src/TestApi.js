@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-
+/*
 axios.get('https://shazib.online/ords/general/service/demo').then(resp => { //<-- URL
     console.log(resp.data.items);
    //First row
@@ -12,6 +12,15 @@ axios.get('https://shazib.online/ords/general/service/demo').then(resp => { //<-
 });
 
 
+*/
 
 
+ fetchUser=()=>{
+         axios.get('https://shazib.online/ords/general/blog/main')
+         .then(response=>{console.log(response.data.items)
 
+         })
+    }
+
+
+fetchUser()

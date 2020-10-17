@@ -23,9 +23,18 @@ yarn-debug.log*
 yarn-error.log*
 
 ##blog related
-/images
-./Dummytest.js
+images
 ./Example.js
 jumbotron.js
 PostExample.js
-./Blink.js
+Blink.js
+Contact.js
+Example.js
+favicon.ico
+public
+ApiTest.js
+api
+api.js
+Main.js
+src/TestApi.js
+src/pages/About.js
