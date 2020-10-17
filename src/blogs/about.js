@@ -12,13 +12,13 @@ import {getAboutText} from '../cache/actions/textActions'
 
         
         return (
-            <div>
+
+                <div> 
                 {about.map(t => 
-                     <React.Fragment key={t.id}>
-                         <p style={{ paddingTop: '50px',fontSize: '18px', fontWeight: '400', color: 'black'}} >{t.text}</p> 
-                     </React.Fragment>
+                     <p key={t.id} style={{ paddingTop: '50px',fontSize: '18px', fontWeight: '400', color: 'black', textAlign: 'justify'}} >{t.text}</p> 
+                    
                 )}
-            </div>
+          </div>
         )
     }
 }
