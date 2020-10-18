@@ -11,7 +11,7 @@ export default function Page({ id }) {
       <div id={id}>
            {(() => {
         if (id === 'Home') {
-                    return <Home/>;
+          return <Home/>;
                   } 
         else if (id === 'About') {
           return <About />;

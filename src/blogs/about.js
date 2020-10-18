@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {getAboutText} from '../cache/actions/textActions'
+import {getAboutText} from '../cache/actions/actions'
 
  class about extends Component {
     componentDidMount(){
@@ -15,7 +15,8 @@ import {getAboutText} from '../cache/actions/textActions'
 
                 <div> 
                 {about.map(t => 
-                     <p key={t.id} style={{ paddingTop: '50px',fontSize: '18px', fontWeight: '400', color: 'black', textAlign: 'justify'}} >{t.text}</p> 
+                     <p key={t.text_id} style={{ paddingTop: '50px',fontSize: '18px', fontWeight: '400', color: 'black', textAlign: 'justify'}} >
+                         {t.text}</p> 
                     
                 )}
           </div>

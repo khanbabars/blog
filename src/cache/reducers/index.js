@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-import textReducer from './textReducers'
+import {about} from './aboutReducers'
+import {blogTitle} from './blogTitleReducer'
 
-export default combineReducers({
-  about: textReducer
-})
+
+
+export default combineReducers({  about: about, blogTitle: blogTitle})

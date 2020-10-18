@@ -1,6 +1,6 @@
 import React from 'react'
 import { MDBContainer } from 'mdbreact';
-import Main from '../blogs/Main'
+import BlogTitle from '../blogs/blogTitle'
 
 
 export const Blog = () => { return(
@@ -10,7 +10,7 @@ export const Blog = () => { return(
         <div>
         <br/><br/><br/>
             <p style={{ paddingTop: '10px',fontSize: '24px', fontWeight: '500', color: 'black'}}>Blog</p><br/>
-                        <div align="justify"><Main/>
+                        <div align="justify"><BlogTitle/>
 
 </div>
 
