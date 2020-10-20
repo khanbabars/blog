@@ -48,7 +48,7 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
  lv_api_id number:= 1; 
  lv_payload clob;
  begin
-       select  json_object('text_id' value lv_api_id,'text' value  text  format json)
+       select  json_object('text' value  text  format json)
                 into lv_payload from blog_text where text_id = lv_api_id;
        
         for i in (select text_id, text from blog_text where text_id =  p_in_id) loop
@@ -70,10 +70,30 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
   lv_module_name varchar2(100):= gv_package|| 'get_blog_title'; 
   lv_api_id number:= 2; 
   lv_payload clob;
+  lv_url varchar(100);
  begin    
  
-          select  json_object('api_id' value lv_api_id,'api_name' value  api_name  format json)
-                into lv_payload from rest_api where api_id = lv_api_id;
+        select to_char(substr(link, 1,46)) 
+        into  lv_url 
+            from blog_title where rownum = 1;
+ 
+          select json_arrayagg ('blog_id : '||blog_id
+                         ||' '||'title : '||title
+                         ||' '||'created : '||created
+                         ||' '||'endpoints : '||endpoints
+                         ||' '||'vote :'||vote||' '||'rating :'||rating) items into lv_payload
+            from (    
+                    select bf.blog_id as blog_id , bt.title as title,  bt.created as created, 
+                    replace(bt.link, lv_url) as endpoints,
+                    count(bf.blog_id) as vote, 
+                    (round(avg(bf.rating),2)) as rating 
+                        from blog_feedback bf
+                        join blog_title bt 
+                        on bf.blog_id = bt.title_id 
+                        where bf.rating !=0
+                             group by blog_id, bf.blog_id, bt.title, bt.created, bt.link
+                             order by bt.created desc);              
+                             
             
         
         for i in ( select bf.blog_id blog_id, bt.title title, bt.created created, 
