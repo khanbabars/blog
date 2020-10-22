@@ -31,9 +31,11 @@ Blink.js
 Example.js
 favicon.ico
 public
-ApiTest.js
 api
 api.js
 TestApi.js
 Main.js
 Prototype.js
+blogTitle.js
+apiTest.js
+prototype.js

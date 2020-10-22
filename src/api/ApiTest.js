@@ -28,10 +28,10 @@ export default class ApiTest extends React.Component {
         return <div>Error: {error.message}</div>; //reutn error if component cannot render
       } else if (!isLoaded) { //if loading is set false then render  loading
         return <div>Loading...</div>;
-      } else { //else show api items 
+      } else { //else show api item s
         return (
           <ul>
             {this.state.items.map((item, index) => ( <li key={index}>{item.title}  
               </li>
             ))}
-          </ul>);}}}
+          </ul>);}}} 

@@ -42,4 +42,4 @@ static getDerivedStateFromProps(nextProps, state)
   const data = await response.json();
   const content=[]  = data.items //assign items to content array
   const item =  content||[]
-  return item }   //return item
+  return item }   //return items 
