@@ -1,4 +1,5 @@
 import React from 'react'
+import {API_TITLE} from '../cache/api'
 
 export default class ApiTest extends React.Component {
     constructor(props) {
@@ -7,7 +8,7 @@ export default class ApiTest extends React.Component {
         error: null, isLoaded: false, items: [] }; } 
   
       componentDidMount() { //call api using fetch in react componentDidMount
-      fetch("https://shazib.online/ords/general/blog/title")
+      fetch(API_TITLE)
         .then(res => res.json())
         .then(
           (result) => {

@@ -1,9 +1,10 @@
 import React from "react";
+import {API_TITLE} from '../cache/api'
 
 export default class BlogTitle extends React.Component {
     constructor(props){
         super(props);
-        this.state = {  url : "https://shazib.online/ords/general/blog/title",  
+        this.state = {  url : API_TITLE,  
                         loading: true,  items: [],  setInterval: 3600000, 
                         fetch: false
  }};
