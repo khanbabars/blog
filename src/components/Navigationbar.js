@@ -48,7 +48,7 @@ class Navigationbar extends React.Component {
                   </MDBNavbarNav>
                   <SocialIcon url="https://github.com/khanbabars" />&nbsp;&nbsp;
                   <SocialIcon url="https://twitter.com/khanbabars" />&nbsp;&nbsp;
-                  <SocialIcon url="https://www.linkedin.com/in/salim-shazib-6a04a926" />
+                  <SocialIcon url="https://www.linkedin.com/in/shazib-saleem-warraich-6a04a926" />
               </MDBCollapse>
             </MDBNavbar>
             
