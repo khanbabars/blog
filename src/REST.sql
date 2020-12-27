@@ -9,6 +9,8 @@ CREATE OR REPLACE PACKAGE REST AS
     function get_blog_text(p_in_id in number) return t_tblo_text pipelined;
     
     function get_blog_title return t_tblo_blogtitle pipelined;
+    
+    function get_rows_by_dname(dname in dept.dname%type) return t_dept_tblo pipelined;
 
 END REST;
 /
@@ -110,6 +112,70 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
    return;
  
  end get_blog_title;
+ 
+ 
+ function get_rows_by_dname(dname in dept.dname%type) return t_dept_tblo pipelined
+  is
+    lv_module_name varchar2(100):= gv_package|| 'get_rows_by_dname'; 
+    get_rows_dname logic.dept_rec_tbl;   
+    lv_api_id number:= 3;
+    lv_api_type varchar2(10):= 'GET';
+    lv_payload clob;
+  
+  begin
+        get_rows_dname:=logic.dept_rec_tbl();
+        get_rows_dname:=logic.get_rows_by_dname(dname);
+ 
+        for indx in 1 .. get_rows_dname.count
+            loop
+                pipe row (t_dept_obj(
+                          get_rows_dname(indx).empno 
+                         ,get_rows_dname(indx).ename 
+                         ,get_rows_dname(indx).hiredate 
+                         ,get_rows_dname(indx).dname 
+                         ,get_rows_dname(indx).job 
+                         ,get_rows_dname(indx).salary 
+                         ,get_rows_dname(indx).location
+                         
+                          ));
+                
+    end loop;  
+    
+             apex_json.initialize_clob_output();
+             apex_json.open_object();
+             apex_json.write('department_name : ', dname);
+             lv_payload := apex_json.get_clob_output();
+             apex_json.free_output();
+             log_message (lv_api_id, lv_payload);
+    
+     return;       
+    
+ end get_rows_by_dname;
+    
+    
 
+
+
+ /*
+ 
+ select 
+    json_arrayagg
+    (
+               'empno : ' ||    empno 
+        ||' '||'ename : '||     ename
+        ||' '|| 'hiredate : '|| hiredate
+        ||' '||'dname : '||     dname
+        ||' '||'job : '||       job
+        ||' '||'salary : '||    salary
+        ||' '||'location : '||  location
+    )
+    from (
+        select empno , ename, hiredate, dname, job, salary, location 
+        from emp, dept  
+        where emp.deptno = dept.deptno  
+            and lower(dept.dname) = 'sales'
+            order by ename);
+
+*/
 END REST;
 /
