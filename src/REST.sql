@@ -10,7 +10,7 @@ CREATE OR REPLACE PACKAGE REST AS
     
     function get_blog_title return t_tblo_blogtitle pipelined;
     
-    function get_rows_by_dname(dname in dept.dname%type) return t_dept_tblo pipelined;
+    function get_rows_by_deptno(p_in_deptno in dept.deptno%type) return t_dept_tblo pipelined;
 
 END REST;
 /
@@ -114,7 +114,7 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
  end get_blog_title;
  
  
- function get_rows_by_dname(dname in dept.dname%type) return t_dept_tblo pipelined
+ function get_rows_by_deptno(p_in_deptno in dept.deptno%type) return t_dept_tblo pipelined
   is
     lv_module_name varchar2(100):= gv_package|| 'get_rows_by_dname'; 
     get_rows_dname logic.dept_rec_tbl;   
@@ -124,7 +124,7 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
   
   begin
         get_rows_dname:=logic.dept_rec_tbl();
-        get_rows_dname:=logic.get_rows_by_dname(dname);
+        get_rows_dname:=logic.get_rows_by_deptno(p_in_deptno);
  
         for indx in 1 .. get_rows_dname.count
             loop
@@ -143,14 +143,14 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
     
              apex_json.initialize_clob_output();
              apex_json.open_object();
-             apex_json.write('department_name : ', dname);
+             apex_json.write('department_name : ', p_in_deptno);
              lv_payload := apex_json.get_clob_output();
              apex_json.free_output();
              log_message (lv_api_id, lv_payload);
     
      return;       
     
- end get_rows_by_dname;
+ end get_rows_by_deptno;
     
     
 
