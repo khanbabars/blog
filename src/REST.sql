@@ -116,7 +116,7 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
  
  function get_rows_by_deptno(p_in_deptno in dept.deptno%type) return t_dept_tblo pipelined
   is
-    lv_module_name varchar2(100):= gv_package|| 'get_rows_by_dname'; 
+    lv_module_name varchar2(100):= gv_package|| 'get_rows_by_deptno'; 
     get_rows_dname logic.dept_rec_tbl;   
     lv_api_id number:= 3;
     lv_api_type varchar2(10):= 'GET';
@@ -143,7 +143,7 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
     
              apex_json.initialize_clob_output();
              apex_json.open_object();
-             apex_json.write('department_name : ', p_in_deptno);
+             apex_json.write('department_no : ', p_in_deptno);
              lv_payload := apex_json.get_clob_output();
              apex_json.free_output();
              log_message (lv_api_id, lv_payload);
