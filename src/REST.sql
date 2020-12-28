@@ -117,25 +117,25 @@ function get_blog_text(p_in_id in number) return t_tblo_text pipelined
  function get_rows_by_deptno(p_in_deptno in dept.deptno%type) return t_dept_tblo pipelined
   is
     lv_module_name varchar2(100):= gv_package|| 'get_rows_by_deptno'; 
-    get_rows_dname logic.dept_rec_tbl;   
+    get_rows_deptno logic.dept_rec_tbl;   
     lv_api_id number:= 3;
     lv_api_type varchar2(10):= 'GET';
     lv_payload clob;
   
   begin
-        get_rows_dname:=logic.dept_rec_tbl();
-        get_rows_dname:=logic.get_rows_by_deptno(p_in_deptno);
+        get_rows_deptno:=logic.dept_rec_tbl();
+        get_rows_deptno:=logic.get_rows_by_deptno(p_in_deptno);
  
-        for indx in 1 .. get_rows_dname.count
+        for indx in 1 .. get_rows_deptno.count
             loop
                 pipe row (t_dept_obj(
-                          get_rows_dname(indx).empno 
-                         ,get_rows_dname(indx).ename 
-                         ,get_rows_dname(indx).hiredate 
-                         ,get_rows_dname(indx).dname 
-                         ,get_rows_dname(indx).job 
-                         ,get_rows_dname(indx).salary 
-                         ,get_rows_dname(indx).location
+                          get_rows_deptno(indx).empno 
+                         ,get_rows_deptno(indx).ename 
+                         ,get_rows_deptno(indx).hiredate 
+                         ,get_rows_deptno(indx).dname 
+                         ,get_rows_deptno(indx).job 
+                         ,get_rows_deptno(indx).salary 
+                         ,get_rows_deptno(indx).location
                          
                           ));
                 
